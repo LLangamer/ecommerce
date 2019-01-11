@@ -293,7 +293,7 @@ $app->post("/admin/categories/create",function(){
 
 $app->get("/admin/categories/:idcategory/delete",function($idcategory){
 
-	
+
 	User::verifyLogin();
 
 
@@ -330,7 +330,7 @@ $app->post("/admin/categories/:idcategory",function($idcategory){
 
 	
 	User::verifyLogin();
-
+ 
 	$category = new Category();
 
 	$category->get((int)$idcategory);
@@ -343,6 +343,22 @@ $app->post("/admin/categories/:idcategory",function($idcategory){
 	exit;
 
 	
+});
+
+$app->get("/categories/:idcategory",function($idcategory){
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$page = new Page();
+
+	$page->setTpl("category",[
+		'category'=>$category->getValues(),
+		'products'=>[]
+	]);
+
+
 });
 
 
